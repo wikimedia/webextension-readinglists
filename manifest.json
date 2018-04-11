@@ -1,7 +1,7 @@
 {
   "name": "Add to Reading List",
-  "description" : "WebExtension for adding a Wikimedia wiki page to a user's synchronized reading list.",
-  "version": "0.1",
+  "description": "WebExtension for adding a Wikimedia wiki page to a user's synchronized reading list.",
+  "version": "0.1.0",
   "manifest_version": 2,
   "permissions": [
     "tabs",

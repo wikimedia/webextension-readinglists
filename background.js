@@ -35,9 +35,19 @@ function initializePageAction(tab) {
         browser.pageAction.show(tab.id);
     }
 }
-  
-browser.tabs.query({}).then((tabs) => {
-    for (let tab of tabs) initializePageAction(tab);
-});
+
+// Attempt a query first so this doesn't break unit testing
+if (browser.tabs.query({})) {
+    browser.tabs.query({}).then((tabs) => {
+        for (let tab of tabs) initializePageAction(tab);
+    });
+}
   
 browser.tabs.onUpdated.addListener((id, changeInfo, tab) => initializePageAction(tab));
+
+module.exports = {
+    testing: {
+        isSupportedHost,
+        isSavablePage
+    }
+}
