@@ -13,7 +13,7 @@ const projectHosts = [
     'incubator.wikimedia.org',
     'commons.wikimedia.org',
     'species.wikimedia.org'
-]
+];
 
 function isSupportedHost(hostname) {
     for (let i = 0; i < projectHosts.length; i++) {
@@ -25,8 +25,15 @@ function isSupportedHost(hostname) {
     return false;
 }
 
+function isSavablePage(path, params) {
+    return path.includes('/wiki/') || (path.includes('index.php') && params.has('title'));
+}
+
 function initializePageAction(tab) {
-    if (isSupportedHost(new URL(tab.url).hostname)) browser.pageAction.show(tab.id);
+    const url = new URL(tab.url);
+    if (isSupportedHost(url.hostname) && isSavablePage(url.pathname, url.searchParams)) {
+        browser.pageAction.show(tab.id);
+    }
 }
   
 browser.tabs.query({}).then((tabs) => {
