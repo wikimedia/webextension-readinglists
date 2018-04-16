@@ -40,17 +40,17 @@
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-      "32": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-      "48": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-      "128": "Wikimedia_Cloud_Services_small_logo_no_text.png"
+      "16": "icon_Addtolist_48x48.png",
+      "32": "icon_Addtolist_48x48.png",
+      "48": "icon_Addtolist_48x48.png",
+      "128": "icon_Addtolist_128x128.png"
     }
   },
   "icons": {
-    "16": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-    "32": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-    "48": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-    "128": "Wikimedia_Cloud_Services_small_logo_no_text.png"
+    "16": "icon_Addtolist_48x48.png",
+    "32": "icon_Addtolist_48x48.png",
+    "48": "icon_Addtolist_48x48.png",
+    "128": "icon_Addtolist_128x128.png"
   },
   "commands": {
     "_execute_browser_action": {
