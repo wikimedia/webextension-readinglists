@@ -48,7 +48,11 @@ function show(id) {
 }
 
 function showLoginPage(url) {
-    browser.tabs.update({ url: `${url.origin}/wiki/Special:UserLogin?returnto=${parseTitleFromUrl(url)}` });
+    let loginUrl = `${url.origin}/wiki/Special:UserLogin?returnto=${encodeURIComponent(parseTitleFromUrl(url))}`;
+    if (url.search) {
+        loginUrl = loginUrl.concat(`&returntoquery=${encodeURIComponent(url.search.slice(1))}`);
+    }
+    browser.tabs.update({ url: loginUrl });
 }
 
 function showLoginPrompt(url) {
@@ -71,7 +75,7 @@ function mobileToCanonicalHost(url) {
 }
 
 function getAddToListPostBody(url) {
-    return `project=${mobileToCanonicalHost(url).origin}&title=${parseTitleFromUrl(url)}`;
+    return `project=${mobileToCanonicalHost(url).origin}&title=${encodeURIComponent(parseTitleFromUrl(url))}`;
 }
 
 function getAddToListPostOptions(url) {
