@@ -21,6 +21,22 @@
     "scripts": [ "dist/browser-polyfill.min.js", "background.js" ],
     "persistent": false
   },
+  "content_scripts": [{
+    "js": [ "dist/browser-polyfill.min.js", "content.js" ],
+    "matches": [
+      "https://*.wikipedia.org/*",
+      "https://*.wikidata.org/*",
+      "https://*.wikivoyage.org/*",
+      "https://*.wiktionary.org/*",
+      "https://*.wikibooks.org/*",
+      "https://*.mediawiki.org/*",
+      "https://*.wikisource.org/*",
+      "https://*.wikiversity.org/*",
+      "https://*.wikinews.org/*",
+      "https://*.wikiquote.org/*",
+      "https://*.wikimedia.org/*"
+    ]
+  }],
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
