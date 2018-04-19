@@ -21,20 +21,36 @@
     "scripts": [ "dist/browser-polyfill.min.js", "background.js" ],
     "persistent": false
   },
+  "content_scripts": [{
+    "js": [ "dist/browser-polyfill.min.js", "content.js" ],
+    "matches": [
+      "https://*.wikipedia.org/*",
+      "https://*.wikidata.org/*",
+      "https://*.wikivoyage.org/*",
+      "https://*.wiktionary.org/*",
+      "https://*.wikibooks.org/*",
+      "https://*.mediawiki.org/*",
+      "https://*.wikisource.org/*",
+      "https://*.wikiversity.org/*",
+      "https://*.wikinews.org/*",
+      "https://*.wikiquote.org/*",
+      "https://*.wikimedia.org/*"
+    ]
+  }],
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-      "32": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-      "48": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-      "128": "Wikimedia_Cloud_Services_small_logo_no_text.png"
+      "16": "icon_Addtolist_48x48.png",
+      "32": "icon_Addtolist_48x48.png",
+      "48": "icon_Addtolist_48x48.png",
+      "128": "icon_Addtolist_128x128.png"
     }
   },
   "icons": {
-    "16": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-    "32": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-    "48": "Wikimedia_Cloud_Services_small_logo_no_text.png",
-    "128": "Wikimedia_Cloud_Services_small_logo_no_text.png"
+    "16": "icon_Addtolist_48x48.png",
+    "32": "icon_Addtolist_48x48.png",
+    "48": "icon_Addtolist_48x48.png",
+    "128": "icon_Addtolist_128x128.png"
   },
   "commands": {
     "_execute_browser_action": {
