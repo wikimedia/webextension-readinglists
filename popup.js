@@ -41,6 +41,11 @@ function setUpReadingListsForUser(url) {
     .then(token => fetch(readingListSetupUrlForOrigin(url.origin, token), { method: 'POST', credentials: 'same-origin' }));
 }
 
+function parseTitleFromUrl(href) {
+    const url = new URL(href);
+    return url.searchParams.has('title') ? url.searchParams.get('title') : url.pathname.replace('/wiki/', '');
+}
+
 function show(id) {
     // Use setTimeout to work around an extension popup resizing bug on Chrome
     // see https://bugs.chromium.org/p/chromium/issues/detail?id=428044
@@ -94,7 +99,7 @@ function handleAddPageToListResult(res) {
 }
 
 function getCanonicalPageTitle(tab) {
-    return browser.tabs.sendMessage(tab.id, { type: 'wikiExtensionGetPageTitle' }).then(res => res.title);
+    return browser.tabs.sendMessage(tab.id, { type: 'wikiExtensionGetPageTitle' }).then(res => parseTitleFromUrl(res.href));
 }
 
 function addPageToDefaultList(tab, url, listId, token) {
