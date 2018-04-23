@@ -72,7 +72,7 @@ function showAddToListSuccessMessage() {
 }
 
 function showAddToListFailureMessage(res) {
-    document.getElementById('failureReason').textContent = res.detail ? res.detail : res.title ? res.title : res.type ? res.type : res;
+    document.getElementById('failureReason').textContent = res.detail ? res.detail : res.title ? res.title : res.type ? res.type : typeof res === 'object' ? JSON.stringify(res) : res;
     show('addToListFailedContainer');
 }
 
