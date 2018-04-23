@@ -49,7 +49,7 @@ function parseTitleFromUrl(href) {
 function show(id) {
     // Use setTimeout to work around an extension popup resizing bug on Chrome
     // see https://bugs.chromium.org/p/chromium/issues/detail?id=428044
-    setTimeout(() => { document.getElementById(id).style.display = 'block' }, 50);
+    setTimeout(() => { document.getElementById(id).style.display = 'block' }, 200);
 }
 
 function showLoginPage(url, title) {
