@@ -2,10 +2,6 @@ function getReadingListsUrlForOrigin(origin) {
     return `${origin}/api/rest_v1/data/lists/`;
 }
 
-function readingListSetupUrlForOrigin(origin, token) {
-    return `${origin}/api/rest_v1/data/lists/setup?csrf_token=${encodeURIComponent(token)}`;
-}
-
 function readingListPostEntryUrlForOrigin(origin, listId, token) {
     return `${origin}/api/rest_v1/data/lists/${listId}/entries/?csrf_token=${encodeURIComponent(token)}`;
 }
@@ -27,18 +23,23 @@ function getCsrfToken(origin) {
 function getDefaultListId(url) {
     return fetch(getReadingListsUrlForOrigin(url.origin), { credentials: 'same-origin' })
     .then(res => {
-        if (!res.ok) {
-            return setUpReadingListsForUser(url)
-            .then(res => getDefaultListId(url));
+        if (res.status < 200 || res.status > 399) {
+            return res.json().then(res => {
+                // Must be thrown from here for Firefox
+                throw res;
+            });
+        } else {
+            return res.json();
         }
-        return res.json()
-        .then(res => res.lists.filter(list => list.default)[0].id);
     })
-}
-
-function setUpReadingListsForUser(url) {
-    return getCsrfToken(url.origin)
-    .then(token => fetch(readingListSetupUrlForOrigin(url.origin, token), { method: 'POST', credentials: 'same-origin' }));
+    .then(res => {
+        if (res.status < 200 || res.status > 399) {
+            // Must be thrown from here for Chrome
+            throw res;
+        } else {
+            return res.lists.filter(list => list.default)[0].id;
+        }
+    });
 }
 
 function parseTitleFromUrl(href) {
