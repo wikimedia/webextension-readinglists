@@ -1,0 +1,9 @@
+{
+  "login": "Midira",
+  "readinglists-browser-add-entry-success": "$1 enregistré dans votre liste de lecture",
+  "readinglists-browser-enable-sync-prompt": "Activer la synchronisation sur votre application Wikipédia pour commencer à enregistrer des articles",
+  "readinglists-browser-error-intro": "Une erreur s’est produite : $1",
+  "readinglists-browser-extension-info-link-text": "En savoir plus",
+  "readinglists-browser-list-entry-limit-exceeded": "L’article n’a pas pu être enregistré. Vous avez atteint la limite de $1 articles par liste",
+  "readinglists-browser-login-prompt": "Se connecter pour enregistrer des articles"
+}
