@@ -1,0 +1,9 @@
+{
+  "login": "로그인",
+  "readinglists-browser-add-entry-success": "$1 문서를 읽기 목록에 저장했습니다",
+  "readinglists-browser-enable-sync-prompt": "문서 저장을 시작하기 위해 위키백과 앱에서 동기화를 사용합니다",
+  "readinglists-browser-error-intro": "오류가 발생했습니다: $1",
+  "readinglists-browser-extension-info-link-text": "더 알아보기",
+  "readinglists-browser-list-entry-limit-exceeded": "문서를 저장할 수 없습니다. 목록 당 문서 $1개의 제한에 도달했습니다",
+  "readinglists-browser-login-prompt": "로그인하여 문서를 저장합니다"
+}
