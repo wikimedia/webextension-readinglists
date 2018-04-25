@@ -1,5 +1,3 @@
-const uiLang = browser.i18n.getUILanguage();
-
 function getReadingListsUrlForOrigin(origin, next) {
     let result = `${origin}/api/rest_v1/data/lists/`;
     if (next) {
@@ -30,10 +28,8 @@ function getCsrfToken(origin) {
     .then(res => res.query.tokens.csrftoken);
 }
 
-function getMaxEntriesPerList(origin) {
-    return fetch(siteInfoUrlForOrigin(origin))
-    .then(res => res.json())
-    .then(res => res.query.general['readinglists-config'].maxEntriesPerList);
+function getSiteInfo(origin) {
+    return fetch(siteInfoUrlForOrigin(origin)).then(res => res.json());
 }
 
 function getDefaultListId(url, next) {
@@ -85,46 +81,49 @@ function showLoginPage(url, title) {
 }
 
 function showLoginPrompt(tab, url) {
-    return getCanonicalPageTitle(tab).then(title => {
-        return geti18nMessages(uiLang).then(messages => {
-            document.getElementById('loginPromptText').textContent = messages['readinglists-browser-login-prompt'];
-            document.getElementById('loginButton').textContent = messages['login'];
-            document.getElementById('loginButton').onclick = () => showLoginPage(url, title);
-            show('loginPromptContainer');
-        });
-    });
+    return getSiteInfo(url.origin)
+    .then(si => geti18nMessages(si.query.general.lang)
+    .then(messages => getCanonicalPageTitle(tab)
+    .then(title => {
+        document.getElementById('loginPromptText').textContent = messages['readinglists-browser-login-prompt'];
+        document.getElementById('loginButton').textContent = messages['login'];
+        document.getElementById('loginButton').onclick = () => showLoginPage(url, title);
+        show('loginPromptContainer');
+    })));
 }
 
-function showAddToListSuccessMessage(tab) {
-    return getCanonicalPageTitle(tab).then(title => {
-        return geti18nMessages(uiLang).then(messages => {
-            const message = messages['readinglists-browser-add-entry-success'].replace('$1', title.replace(/_/g, ' '));
-            document.getElementById('successText').textContent = message;
-            show('addToListSuccessContainer');
-        });
-    });
+function showAddToListSuccessMessage(tab, url) {
+    return getSiteInfo(url.origin)
+    .then(si => geti18nMessages(si.query.general.lang)
+    .then(messages => getCanonicalPageTitle(tab)
+    .then(title => {
+        const message = messages['readinglists-browser-add-entry-success'].replace('$1', title.replace(/_/g, ' '));
+        document.getElementById('successText').textContent = message;
+        show('addToListSuccessContainer');
+    })));
 }
 
 function showAddToListFailureMessage(url, res) {
-    return getMaxEntriesPerList(url.origin).then(maxEntries => {
-        return geti18nMessages(uiLang).then(messages => {
-            let message;
-            if (res.title === 'readinglists-db-error-not-set-up') {
-                message = messages['readinglists-browser-enable-sync-prompt'];
-                const learnMoreLink = document.getElementById('learnMoreLink');
-                learnMoreLink.textContent = messages['readinglists-browser-extension-info-link-text'];
-                learnMoreLink.onclick = (element) => browser.tabs.create({ url: learnMoreLink.href });
-                document.getElementById('learnMoreLinkContainer').style.display = 'block';
-            } else if (res.title === 'readinglists-db-error-entry-limit') {
-                message = messages['readinglists-browser-list-entry-limit-exceeded'].replace('$1', maxEntries.toString());
-            } else {
-                const detail = res.detail ? res.detail : res.title ? res.title : res.type ? res.type : typeof res === 'object' ? JSON.stringify(res) : res;
-                message = messages['readinglists-browser-error-intro'].replace('$1', detail);
-            }
-            document.getElementById('failureReason').textContent = message;
-            show('addToListFailedContainer');
-        });
-    });
+    return getSiteInfo(url.origin)
+    .then(si => geti18nMessages(si.query.general.lang)
+    .then(messages => {
+        let message;
+        if (res.title === 'readinglists-db-error-not-set-up') {
+            message = messages['readinglists-browser-enable-sync-prompt'];
+            const learnMoreLink = document.getElementById('learnMoreLink');
+            learnMoreLink.textContent = messages['readinglists-browser-extension-info-link-text'];
+            learnMoreLink.onclick = () => browser.tabs.create({ url: learnMoreLink.href });
+            document.getElementById('learnMoreLinkContainer').style.display = 'block';
+        } else if (res.title === 'readinglists-db-error-entry-limit') {
+            const maxEntries = si.query.general['readinglists-config'].maxEntriesPerList;
+            message = messages['readinglists-browser-list-entry-limit-exceeded'].replace('$1', maxEntries.toString());
+        } else {
+            const detail = res.detail ? res.detail : res.title ? res.title : res.type ? res.type : typeof res === 'object' ? JSON.stringify(res) : res;
+            message = messages['readinglists-browser-error-intro'].replace('$1', detail);
+        }
+        document.getElementById('failureReason').textContent = message;
+        show('addToListFailedContainer');
+    }));
 }
 
 function mobileToCanonicalHost(url) {
@@ -146,7 +145,7 @@ function getAddToListPostOptions(url, title) {
 }
 
 function handleAddPageToListResult(tab, url, res) {
-    if (res.id) showAddToListSuccessMessage(tab); else showAddToListFailureMessage(url, res);
+    if (res.id) showAddToListSuccessMessage(tab, url); else showAddToListFailureMessage(url, res);
 }
 
 function getCanonicalPageTitle(tab) {
@@ -172,16 +171,8 @@ function fetchMessagesForLang(lang) {
     return fetch(browser.extension.getURL(`i18n/${lang}.json`));
 }
 
-function geti18nMessages(preferredLang) {
-    let lang = preferredLang;
-    return fetchMessagesForLang(lang).then(res => res.json())
-    .catch(err => {
-        lang = lang.split('-')[0];
-        return fetchMessagesForLang(lang).then(res => res.json());
-    }).catch(err => {
-        lang = 'en';
-        return fetchMessagesForLang(lang).then(res => res.json());
-    });
+function geti18nMessages(lang) {
+    return fetchMessagesForLang(lang).then(res => res.json());
 }
 
 getCurrentTab().then(tab => {
