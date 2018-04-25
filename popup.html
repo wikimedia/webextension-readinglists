@@ -6,15 +6,17 @@
   </head>
   <body>
     <div id="loginPromptContainer" style="display:none">
-      <p>You must be logged in to add a page to a reading list.</p>
-      <button id="loginButton">Log in</button>
+      <p id="loginPromptText"></p>
+      <button id="loginButton"></button>
     </div>
     <div id="addToListSuccessContainer" style="display:none">
-      <p>Page added!</p>
+      <p id="successText"></p>
     </div>
     <div id="addToListFailedContainer" style="display:none">
-      <p>Failed to add page:</p>
-      <p><strong id="failureReason"></strong></p>
+      <p id="failureReason"></p>
+      <p id="learnMoreLinkContainer" style="display:none">
+        <a id="learnMoreLink" href="https://www.mediawiki.org/wiki/Wikimedia_Apps/Synced_Reading_Lists"></a>
+      </p>
     </div>
     <script type="application/javascript" src="dist/browser-polyfill.min.js"></script>
     <script type="application/javascript" src="popup.js"></script>
