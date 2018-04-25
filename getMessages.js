@@ -1,7 +1,7 @@
 const jsonfile = require('jsonfile');
 const preq = require('preq');
 
-const API_BASE_URL = `https://test.wikipedia.org/w/api.php`;
+const API_BASE_URL = `https://www.mediawiki.org/w/api.php`;
 
 const MESSAGE_KEYS = [
     'login',
