@@ -74,7 +74,7 @@ function showLoginPage(url, title) {
 
 function showLoginPrompt(tab, url) {
     return getCanonicalPageTitle(tab).then(title => {
-        document.getElementById('loginButton').onclick = (element) => showLoginPage(url, title);
+        document.getElementById('loginButton').onclick = () => showLoginPage(url, title);
         show('loginPromptContainer');
     });
 }
