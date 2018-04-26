@@ -1,5 +1,9 @@
-function getReadingListsUrlForOrigin(origin) {
-    return `${origin}/api/rest_v1/data/lists/`;
+function getReadingListsUrlForOrigin(origin, next) {
+    let result = `${origin}/api/rest_v1/data/lists/`;
+    if (next) {
+        result = result.concat(`?next=${next}`);
+    }
+    return result;
 }
 
 function readingListPostEntryUrlForOrigin(origin, listId, token) {
@@ -20,8 +24,8 @@ function getCsrfToken(origin) {
     .then(res => res.query.tokens.csrftoken);
 }
 
-function getDefaultListId(url) {
-    return fetch(getReadingListsUrlForOrigin(url.origin), { credentials: 'same-origin' })
+function getDefaultListId(url, next) {
+    return fetch(getReadingListsUrlForOrigin(url.origin, next), { credentials: 'same-origin' })
     .then(res => {
         if (res.status < 200 || res.status > 399) {
             return res.json().then(res => {
@@ -37,7 +41,8 @@ function getDefaultListId(url) {
             // Must be thrown from here for Chrome
             throw res;
         } else {
-            return res.lists.filter(list => list.default)[0].id;
+            const defaultList = res.lists.filter(list => list.default)[0];
+            return defaultList ? defaultList.id : getDefaultListId(url, res.next);
         }
     });
 }
