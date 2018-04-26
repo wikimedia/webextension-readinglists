@@ -42,7 +42,13 @@ function getDefaultListId(url, next) {
             throw res;
         } else {
             const defaultList = res.lists.filter(list => list.default)[0];
-            return defaultList ? defaultList.id : getDefaultListId(url, res.next);
+            if (defaultList) {
+                return defaultList.id;
+            } else if (res.next) {
+                return getDefaultListId(url, res.next);
+            } else {
+                throw new Error("no default list");
+            }
         }
     });
 }
