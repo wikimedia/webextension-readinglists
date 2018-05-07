@@ -1,9 +1,0 @@
-{
-  "login": "Sumrek",
-  "readinglists-browser-add-entry-success": "Naidulin ti $1 iti listaan ti basbasaem",
-  "readinglists-browser-enable-sync-prompt": "Enable syncing on your Wikipedia app to begin saving articles",
-  "readinglists-browser-error-intro": "Adda maysa a napasamak a biddut: $1",
-  "readinglists-browser-extension-info-link-text": "Agadal ka pay ti adu",
-  "readinglists-browser-list-entry-limit-exceeded": "Saan a maidulin ti artikulo. Naabutamon ti patingga dagiti $1 nga artikulo iti tunggal maysa a listaan",
-  "readinglists-browser-login-prompt": "Sumrek tapno maidulin dagiti artikulo"
-}

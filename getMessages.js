@@ -1,6 +1,8 @@
 const jsonfile = require('jsonfile');
 const preq = require('preq');
 
+const DEFAULT_LANGS = [ 'en' ];
+
 const API_BASE_URL = `https://www.mediawiki.org/w/api.php`;
 
 const MESSAGE_KEYS = [
@@ -12,14 +14,6 @@ const MESSAGE_KEYS = [
     'readinglists-browser-list-entry-limit-exceeded',
     'readinglists-browser-login-prompt'
 ];
-
-const SITEMATRIX_QUERY = {
-    action: 'sitematrix',
-    format: 'json',
-    formatversion: '2',
-    smtype: 'language',
-    smlangprop: 'code'
-}
 
 const ALLMESSAGES_QUERY = {
     action: 'query',
@@ -34,20 +28,8 @@ function objToQueryString(obj) {
     return Object.keys(obj).map(key => `${key}=${obj[key]}`).join('&');
 }
 
-function siteMatrixRequestUri() {
-    return `${API_BASE_URL}?${objToQueryString(SITEMATRIX_QUERY)}`;
-}
-
 function allMessagesRequestUriForLang(lang) {
     return `${API_BASE_URL}?${objToQueryString(Object.assign(ALLMESSAGES_QUERY, { amlang: lang }))}`;
-}
-
-async function getLanguages() {
-    return await preq.get({ uri: siteMatrixRequestUri() }).then(res => {
-        const sitematrix = res.body.sitematrix;
-        delete sitematrix.count;
-        return Object.keys(sitematrix).map(key => sitematrix[key].code);
-    });
 }
 
 async function getMessages(langs) {
@@ -64,7 +46,7 @@ async function getMessages(langs) {
     return messages;
 }
 
-getLanguages().then(langs => getMessages(langs).then(messages => {
+getMessages(DEFAULT_LANGS).then(messages => {
     Object.keys(messages).forEach(lang => jsonfile.writeFile(`i18n/${lang}.json`, messages[lang], { spaces: 2 }, err => {}));
     console.log('Wrote messages to i18n/[lang].json');
-}));
+});

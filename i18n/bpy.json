@@ -1,9 +1,0 @@
-{
-  "login": "হমানি",
-  "readinglists-browser-add-entry-success": "আপনার পড়ার তালিকা $1 সংরক্ষিত হয়েছে",
-  "readinglists-browser-enable-sync-prompt": "নিবন্ধ সংরক্ষণ শুরু করতে আপনার উইকিপিডিয়া অ্যাপে সিঙ্কিং সক্ষম করুন",
-  "readinglists-browser-error-intro": "একটি ত্রুটি দেখা দিয়েছে: $1",
-  "readinglists-browser-extension-info-link-text": "আরও জানুন",
-  "readinglists-browser-list-entry-limit-exceeded": "নিবন্ধ সংরক্ষণ করা যাবে না। আপনি তালিকা প্রতি $1টি নিবন্ধের সীমাতে পৌঁছেছেন",
-  "readinglists-browser-login-prompt": "নিবন্ধ সংরক্ষণ করতে প্রবেশ করুন"
-}

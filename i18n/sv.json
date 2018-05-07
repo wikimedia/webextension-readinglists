@@ -1,9 +1,0 @@
-{
-  "login": "Logga in",
-  "readinglists-browser-add-entry-success": "$1 sparades i din läslista",
-  "readinglists-browser-enable-sync-prompt": "Aktivera synkronisering på din Wikipedia-app för att börja spara artiklar",
-  "readinglists-browser-error-intro": "Ett fel har uppstått: $1",
-  "readinglists-browser-extension-info-link-text": "Läs mer",
-  "readinglists-browser-list-entry-limit-exceeded": "Artikeln kan inte sparas. Du har nått gränsen på $1 artiklar per lista",
-  "readinglists-browser-login-prompt": "Logga in för att spara artiklar"
-}

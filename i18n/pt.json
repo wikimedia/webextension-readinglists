@@ -1,9 +1,0 @@
-{
-  "login": "Entrar",
-  "readinglists-browser-add-entry-success": "$1 guardada na sua lista de leitura",
-  "readinglists-browser-enable-sync-prompt": "Ative a sincronização na sua aplicação da Wikipédia para começar a guardar artigos",
-  "readinglists-browser-error-intro": "Ocorreu um erro: $1",
-  "readinglists-browser-extension-info-link-text": "Saiba mais",
-  "readinglists-browser-list-entry-limit-exceeded": "O artigo não pode ser guardado. Atingiu o limite de $1 artigos por lista",
-  "readinglists-browser-login-prompt": "Inicie sessão para guardar artigos"
-}

@@ -1,9 +1,0 @@
-{
-  "login": "כניסה לחשבון",
-  "readinglists-browser-add-entry-success": "הדף $1 נשמר ברשימת הקריאה שלך",
-  "readinglists-browser-enable-sync-prompt": "יש להפעיל את הסנכרון ביישום הוויקיפדיה שלך כדי להתחיל לשמור ערכים",
-  "readinglists-browser-error-intro": "אירעה שגיאה: $1",
-  "readinglists-browser-extension-info-link-text": "מידע נוסף",
-  "readinglists-browser-list-entry-limit-exceeded": "לא ניתן לשמור את הערך. הגעת למגבלה של $1 ערכים ברשימה אחת",
-  "readinglists-browser-login-prompt": "יש להיכנס לחשבון כדי לשמור ערכים"
-}
