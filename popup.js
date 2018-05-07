@@ -53,8 +53,7 @@ function getDefaultListId(url, next) {
     });
 }
 
-function parseTitleFromUrl(href) {
-    const url = new URL(href);
+function parseTitleFromUrl(url) {
     return url.searchParams.has('title') ? url.searchParams.get('title') : url.pathname.replace('/wiki/', '');
 }
 
@@ -64,12 +63,16 @@ function show(id) {
     setTimeout(() => { document.getElementById(id).style.display = 'block' }, 200);
 }
 
-function showLoginPage(url, title) {
-    let loginUrl = `${url.origin}/wiki/Special:UserLogin?returnto=${encodeURIComponent(title)}`;
+function constructLoginUrl(url) {
+    let result = `${url.origin}/wiki/Special:UserLogin?returnto=${encodeURIComponent(parseTitleFromUrl(url))}`;
     if (url.search) {
-        loginUrl = loginUrl.concat(`&returntoquery=${encodeURIComponent(url.search.slice(1))}`);
+        result = result.concat(`&returntoquery=${encodeURIComponent(url.search.slice(1))}`);
     }
-    browser.tabs.update({ url: loginUrl });
+    return result;
+}
+
+function showLoginPage(url) {
+    browser.tabs.update({ url: constructLoginUrl(url) });
 }
 
 function showLoginPrompt(tab, url) {
@@ -111,7 +114,7 @@ function handleAddPageToListResult(res) {
 }
 
 function getCanonicalPageTitle(tab) {
-    return browser.tabs.sendMessage(tab.id, { type: 'wikiExtensionGetPageTitle' }).then(res => parseTitleFromUrl(res.href));
+    return browser.tabs.sendMessage(tab.id, { type: 'wikiExtensionGetPageTitle' }).then(res => parseTitleFromUrl(new URL(res.href)));
 }
 
 function addPageToDefaultList(tab, url, listId, token) {
@@ -129,7 +132,19 @@ function handleClick(tab, url) {
     return getCsrfToken(url.origin).then(token => handleTokenResult(tab, url, token));
 }
 
-getCurrentTab().then(tab => {
-    return handleClick(tab, new URL(tab.url))
-    .catch(err => showAddToListFailureMessage(err));
-});
+// Attempt a query first so this doesn't break unit testing
+if (browser.tabs.query({})) {
+    getCurrentTab().then(tab => {
+        return handleClick(tab, new URL(tab.url))
+        .catch(err => showAddToListFailureMessage(err));
+    });
+}
+
+module.exports = {
+    testing: {
+        mobileToCanonicalHost,
+        getAddToListPostBody,
+        constructLoginUrl,
+        parseTitleFromUrl
+    }
+};
