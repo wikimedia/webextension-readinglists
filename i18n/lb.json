@@ -1,9 +1,0 @@
-{
-  "login": "Aloggen",
-  "readinglists-browser-add-entry-success": "$1 in deine Leseliste gespeichert",
-  "readinglists-browser-enable-sync-prompt": "Aktiviere die Synchronisierung auf deiner Wikipedia-App, um mit dem Speichern von Artikeln zu beginnen.",
-  "readinglists-browser-error-intro": "Et ass e Feeler geschitt: $1",
-  "readinglists-browser-extension-info-link-text": "Fir méi ze wëssen",
-  "readinglists-browser-list-entry-limit-exceeded": "Der Artikel konnte nicht gespeichert werden. Du hast die Grenze von $1 Artikeln pro Liste erreicht.",
-  "readinglists-browser-login-prompt": "Alogge fir Artikelen ze späicheren"
-}

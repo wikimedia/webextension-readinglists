@@ -1,9 +1,0 @@
-{
-  "login": "Tên-ngi̍p",
-  "readinglists-browser-add-entry-success": "$1 已儲存至您的閱讀列表",
-  "readinglists-browser-enable-sync-prompt": "在您的維基百科 app 上啟用同步化來開始儲存文章",
-  "readinglists-browser-error-intro": "發生錯誤：$1",
-  "readinglists-browser-extension-info-link-text": "瞭解更多",
-  "readinglists-browser-list-entry-limit-exceeded": "無法儲存文章。您在每個清單中已達到 $1 篇文章限制",
-  "readinglists-browser-login-prompt": "登入以儲存文章"
-}

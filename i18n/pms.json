@@ -1,9 +1,0 @@
-{
-  "login": "Conession",
-  "readinglists-browser-add-entry-success": "$1 salvato nel tuo elenco di lettura",
-  "readinglists-browser-enable-sync-prompt": "Attiva la sincronizzazione sulla tua applicazione di Wikipedia per iniziare a salvare le voci",
-  "readinglists-browser-error-intro": "Si è verificato un errore: $1",
-  "readinglists-browser-extension-info-link-text": "Ulteriori informazioni",
-  "readinglists-browser-list-entry-limit-exceeded": "La voce non può essere salvata. Hai raggiunto il limite di $1 voci per elenco",
-  "readinglists-browser-login-prompt": "Accedi per salvare le voci"
-}

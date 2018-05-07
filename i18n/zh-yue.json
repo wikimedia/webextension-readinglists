@@ -1,9 +1,0 @@
-{
-  "login": "登入",
-  "readinglists-browser-add-entry-success": "$1儲存咗去你嘅閲讀一覽",
-  "readinglists-browser-enable-sync-prompt": "Enable syncing on your Wikipedia app to begin saving articles",
-  "readinglists-browser-error-intro": "An error has occurred: $1",
-  "readinglists-browser-extension-info-link-text": "Learn more",
-  "readinglists-browser-list-entry-limit-exceeded": "Article cannot be saved. You have reached the limit of $1 articles per list",
-  "readinglists-browser-login-prompt": "簽到之後儲存文章"
-}
