@@ -47,6 +47,6 @@ async function getMessages(langs) {
 }
 
 getMessages(DEFAULT_LANGS).then(messages => {
-    Object.keys(messages).forEach(lang => jsonfile.writeFile(`i18n/${lang}.json`, messages[lang], { spaces: 2 }, err => {}));
+    Object.keys(messages).forEach(lang => jsonfile.writeFile(`extension/i18n/${lang}.json`, messages[lang], { spaces: 2 }, err => {}));
     console.log('Wrote messages to i18n/[lang].json');
 });
