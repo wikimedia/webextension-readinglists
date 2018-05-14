@@ -1,6 +1,6 @@
 {
-  "name": "Add to Reading List",
-  "description" : "WebExtension for adding a Wikimedia wiki page to a user's synchronized reading list.",
+  "name": "Wikipedia Reading Lists",
+  "description" : "Save Wikipedia articles to read on Wikipedia’s iOS and Android apps",
   "version": "0.1",
   "manifest_version": 2,
   "permissions": [
