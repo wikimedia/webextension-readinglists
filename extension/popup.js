@@ -155,8 +155,15 @@ function showAddToListSuccessMessage(tab, url) {
     return geti18nMessages(url.origin, [ MESSAGE_KEYS.success ])
     .then(messages => getCanonicalPageTitle(tab)
     .then(title => {
-        const message = messages[MESSAGE_KEYS.success].replace('$1', title.replace(/_/g, ' '));
-        document.getElementById('successText').textContent = message;
+        const placeholder = '$1';
+        const successTextContainer = document.getElementById('successText');
+        const titleElem = document.createElement('b');
+        titleElem.textContent = decodeURIComponent(title).replace(/_/g, ' ');
+        const message = messages[MESSAGE_KEYS.success];
+        successTextContainer.textContent = message;
+        const newTextNode = successTextContainer.firstChild.splitText(message.indexOf(placeholder));
+        newTextNode.deleteData(0, placeholder.length);
+        successTextContainer.insertBefore(titleElem, newTextNode);
         show('addToListSuccessContainer');
     }));
 }
@@ -194,7 +201,7 @@ function mobileToCanonicalHost(url) {
 }
 
 function getAddToListPostBody(url, title) {
-    return `project=${mobileToCanonicalHost(url).origin}&title=${encodeURIComponent(title)}`;
+    return `project=${mobileToCanonicalHost(url).origin}&title=${title}`;
 }
 
 function getAddToListPostOptions(url, title) {
