@@ -16,3 +16,7 @@ node getMessages.js
 ```
 
 Note: Running the tests and i18n message fetching scripts requires Node.js 7.6.0 or newer.
+
+## issues
+
+Please file bugs or feature requests on Phabricator, Wikimedia's issue tracking software. ([link](https://phabricator.wikimedia.org/maniphest/task/edit/form/10/?title=&projects=reading-infrastructure-team-backlog))
