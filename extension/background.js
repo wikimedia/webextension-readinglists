@@ -33,6 +33,8 @@ function initializePageAction(tab) {
     const url = new URL(tab.url);
     if (isSupportedHost(url.hostname) && isSavablePage(url.pathname, url.searchParams)) {
         browser.pageAction.show(tab.id);
+    } else {
+        browser.pageAction.hide(tab.id);
     }
 }
   
