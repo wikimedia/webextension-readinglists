@@ -1,18 +1,6 @@
 const projectHosts = [
     'wikipedia.org',
-    'wikidata.org',
-    'wikivoyage.org',
-    'wiktionary.org',
-    'wikibooks.org',
-    'mediawiki.org',
-    'wikisource.org',
-    'wikiversity.org',
-    'wikinews.org',
-    'wikiquote.org',
-    'meta.wikimedia.org',
-    'incubator.wikimedia.org',
-    'commons.wikimedia.org',
-    'species.wikimedia.org'
+    'wikivoyage.org'
 ];
 
 function isSupportedHost(hostname) {
