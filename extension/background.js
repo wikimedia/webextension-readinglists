@@ -1,11 +1,15 @@
-const projectHosts = [
+const supportedHosts = [
     'wikipedia.org',
     'wikivoyage.org'
 ];
 
+const supportedNamespaces = [
+    0 // NS_MAIN
+];
+
 function isSupportedHost(hostname) {
-    for (let i = 0; i < projectHosts.length; i++) {
-        const host = projectHosts[i];
+    for (let i = 0; i < supportedHosts.length; i++) {
+        const host = supportedHosts[i];
         if (hostname.endsWith(host)) {
             return true;
         }
@@ -13,17 +17,29 @@ function isSupportedHost(hostname) {
     return false;
 }
 
+function isSupportedNamespace(ns) {
+    return supportedNamespaces.includes(ns);
+}
+
 function isSavablePage(path, params) {
     return path.includes('/wiki/') || (path.includes('index.php') && params.has('title'));
 }
 
+function shouldShowPageAction(url, ns) {
+    return isSupportedHost(url.hostname)
+        && isSupportedNamespace(ns)
+        && isSavablePage(url.pathname, url.searchParams);
+}
+
 function initializePageAction(tab) {
     const url = new URL(tab.url);
-    if (isSupportedHost(url.hostname) && isSavablePage(url.pathname, url.searchParams)) {
-        browser.pageAction.show(tab.id);
-    } else {
-        browser.pageAction.hide(tab.id);
-    }
+    browser.tabs.sendMessage(tab.id, { type: 'wikiExtensionGetPageNamespace' }).then((res) => {
+        if (shouldShowPageAction(url, res.ns)) {
+            browser.pageAction.show(tab.id);
+        } else {
+            browser.pageAction.hide(tab.id);
+        }
+    });
 }
   
 browser.tabs.query({}).then((tabs) => {
