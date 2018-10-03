@@ -1,7 +1,7 @@
 {
   "name": "Wikipedia Reading Lists",
   "description" : "Save Wikipedia articles to read on Wikipedia’s iOS and Android apps",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 2,
   "permissions": [
     "tabs",

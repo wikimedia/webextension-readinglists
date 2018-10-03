@@ -1,6 +1,6 @@
 {
   "name": "webextension-readinglists",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "WebExtension for adding a Wikimedia wiki page to a user's synchronized reading list.",
   "license": "Apache-2.0",
   "repository": {
