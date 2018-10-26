@@ -1,6 +1,6 @@
 {
   "name": "Wikipedia Reading Lists",
-  "description" : "Save Wikipedia articles to read on Wikipedia’s iOS and Android apps",
+  "description": "Save Wikipedia articles to read on Wikipedia’s iOS and Android apps",
   "version": "1.1",
   "manifest_version": 2,
   "permissions": [
@@ -9,16 +9,15 @@
     "https://*.wikivoyage.org/"
   ],
   "background": {
-    "scripts": [ "dist/browser-polyfill.min.js", "background.js" ],
+    "scripts": ["dist/browser-polyfill.min.js", "background.js"],
     "persistent": false
   },
-  "content_scripts": [{
-    "js": [ "dist/browser-polyfill.min.js", "content.js" ],
-    "matches": [
-      "https://*.wikipedia.org/*",
-      "https://*.wikivoyage.org/*"
-    ]
-  }],
+  "content_scripts": [
+    {
+      "js": ["dist/browser-polyfill.min.js", "content.js"],
+      "matches": ["https://*.wikipedia.org/*", "https://*.wikivoyage.org/*"]
+    }
+  ],
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
