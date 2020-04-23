@@ -43,6 +43,8 @@ function initializePageAction(tab) {
       } else {
         browser.pageAction.hide(tab.id);
       }
+    }, err => {
+      return false
     });
 }
 
